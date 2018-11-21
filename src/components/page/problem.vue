@@ -192,7 +192,6 @@
             </span>
          
         </el-dialog>
-        
     </div>
 </template>
 
@@ -202,59 +201,57 @@ export default {
   data: function() {
     return {
       activeName: "first",
-      replyCon:"",
+      replyCon: "",
       ccc: 0,
-      id:'',
+      id: "",
       isOrder: true,
-      relly_url:'order_list',
+      relly_url: "order_list",
       tableData: [],
-      region: '',
-      region1: '',
-      status: '',
+      region: "",
+      region1: "",
+      status: "",
       currentPage: 1,
       dialogFormVisible: false,
       isDisabled: false,
       isDisabled1: false,
-      tms_order_code: '',
-      way_code: '',
-      wenContent: '',
-      imgList : [],
-      wenReply : ''
-
+      tms_order_code: "",
+      way_code: "",
+      wenContent: "",
+      imgList: [],
+      wenReply: ""
     };
   },
   created() {
-    this.relly_url = 'order_list';
+    this.relly_url = "order_list";
     this.getList();
   },
   methods: {
     clickTab(tab, event) {
       // 点击  tab
-      if(tab.name == 'sec'){
-        this.relly_url = 'other_list';
-        this.status = '';
-        this.region = '';
+      if (tab.name == "sec") {
+        this.relly_url = "other_list";
+        this.status = "";
+        this.region = "";
         this.isOrder = false;
         this.currentPage = 1;
         this.ccc = 1;
         this.getList();
-      }else{
-        this.relly_url = 'order_list';
-        this.status = '';
+      } else {
+        this.relly_url = "order_list";
+        this.status = "";
         this.isOrder = true;
-        this.region1 = '';
+        this.region1 = "";
         this.currentPage = 1;
         this.ccc = 1;
         this.getList();
       }
-
     },
-    searchOrder(){
+    searchOrder() {
       // 搜索  订单
       this.status = this.region;
       this.getList();
     },
-    searchOther(){
+    searchOther() {
       // 搜索   其他
       this.status = this.region1;
       this.getList();
@@ -263,13 +260,13 @@ export default {
       // 订单问题  展示
       let that = this;
       this.$axios({
-        url: this.URL_API+"/bqs/backend/web/index.php/bug/"+this.relly_url,
+        url: this.URL_API + "/bqs/backend/web/index.php/bug/" + this.relly_url,
         method: "post",
-        data: { 
+        data: {
           page: this.currentPage,
           status: this.status,
-          token: window.sessionStorage.getItem("token") 
-          },
+          token: window.sessionStorage.getItem("token")
+        },
         transformRequest: [
           function(data) {
             let ret = "";
@@ -293,7 +290,7 @@ export default {
         } else if (res.data.code == "400") {
           that.$message("请先登录");
           that.$router.push("/");
-        }else if(res.data.code == '1'){
+        } else if (res.data.code == "1") {
           that.tableData = [];
           that.ccc = 0;
         }
@@ -303,16 +300,21 @@ export default {
       this.currentPage = val;
       this.getList();
     },
-    getUpdate(rows){
+    getUpdate(rows) {
       // console.log(rows.b_id);
       this.id = rows.b_id;
-      let token = window.sessionStorage.getItem("token") ;
+      let token = window.sessionStorage.getItem("token");
       // 获取  内容
       let that = this;
       this.$axios({
-        url: this.URL_API+"/bqs/backend/web/index.php/bug/bug_update?id="+this.id+"&token="+token,
+        url:
+          this.URL_API +
+          "/bqs/backend/web/index.php/bug/bug_update?id=" +
+          this.id +
+          "&token=" +
+          token,
         method: "get",
-        data: { },
+        data: {},
         transformRequest: [
           function(data) {
             let ret = "";
@@ -327,22 +329,21 @@ export default {
           }
         ],
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
-      }).then((res)=>{
+      }).then(res => {
         if (res.data.code == "0") {
-          if(res.data.data.reply == ''){
+          if (res.data.data.reply == "") {
             that.isDisabled = false;
             that.isDisabled1 = false;
-          }else{
+          } else {
             that.isDisabled = true;
             that.isDisabled1 = true;
           }
-           that.tms_order_code = res.data.data.order_code;
-           that.way_code = res.data.data.tms_way_code;
-           that.wenContent = res.data.data.bug;
-           that.imgList = res.data.data.picture;
-           that.replyCon = res.data.data.reply;
+          that.tms_order_code = res.data.data.order_code;
+          that.way_code = res.data.data.tms_way_code;
+          that.wenContent = res.data.data.bug;
+          that.imgList = res.data.data.picture;
+          that.replyCon = res.data.data.reply;
           that.dialogFormVisible = true;
-
         } else if (res.data.code == "450") {
           that.$message("暂无权限");
         } else if (res.data.code == "400") {
@@ -351,19 +352,19 @@ export default {
         }
       });
     },
-    delOrder(){
-        // 回复   提交
-        let token = window.sessionStorage.getItem("token") ;
+    delOrder() {
+      // 回复   提交
+      let token = window.sessionStorage.getItem("token");
       // 获取  内容
       let that = this;
       this.$axios({
-        url: this.URL_API+"/bqs/backend/web/index.php/bug/bug_update",
+        url: this.URL_API + "/bqs/backend/web/index.php/bug/bug_update",
         method: "post",
         data: {
           id: this.id,
           token: token,
           reply: this.replyCon
-         },
+        },
         transformRequest: [
           function(data) {
             let ret = "";
@@ -378,7 +379,7 @@ export default {
           }
         ],
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
-      }).then((res)=>{
+      }).then(res => {
         if (res.data.code == "0") {
           that.dialogFormVisible = false;
           that.$message("回复成功");
@@ -388,7 +389,7 @@ export default {
         } else if (res.data.code == "400") {
           that.$message("请先登录");
           that.$router.push("/");
-        }else{
+        } else {
           that.$message(res.data.message);
         }
       });
@@ -404,18 +405,18 @@ export default {
 </script>
 
 <style scoped>
-.asdf{
-  color:blue;
+.asdf {
+  color: blue;
 }
-.sdf{
+.sdf {
   cursor: pointer;
 }
-.isla{
-  width:90%;
-  resize:none;
+.isla {
+  width: 90%;
+  resize: none;
 }
-.isflex{
+.isflex {
   display: flex;
-
 }
+
 </style>

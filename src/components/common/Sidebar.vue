@@ -24,51 +24,51 @@ export default {
   data() {
     return {
       items:[]
-      // items: [
-      //   {
-      //     icon: "el-icon-edit",
-      //     action: "readme",
-      //     name: "首页",
-      //     son:[{
-      //       action:"baseCharts",
-      //       name:"李洋"
-      //     }]
-      //   },
-      //   {
-      //     icon: "el-icon-document",
-      //     action: "2",
-      //     name: "系统设置",
-      //     son: [
-      //       {
-      //         action: "basetable",
-      //         name: "用户管理"
-      //       },
-      //       {
-      //         action: "vuetable",
-      //         name: "角色管理"
-      //       },
-      //       {
-      //         action: "power",
-      //         name: "权限管理"
-      //       },
-      //       {
-      //         action: "compony",
-      //         name: "公司管理"
-      //       }
-      //     ]
-      //   },
-      //   {
-      //     icon: "el-icon-menu",
-      //     action: "3",
-      //     name: "冰骑士",
-      //     son: [
-      //       {
-      //         action: "oldCharts",
-      //         name: "冰骑士管理"
-      //       }
-      //     ]
-      //   }
-      // ]
+    //   items: [
+    //     {
+    //       icon: "el-icon-edit",
+    //       action: "23423",
+    //       name: "首页",
+    //       son:[{
+    //         action:"basetable",
+    //         name:"李洋"
+    //       }]
+    //     },
+    //     {
+    //       icon: "el-icon-document",
+    //       action: "sd1s2f1s1s2",
+    //       name: "系统设置",
+    //       son: [
+    //         {
+    //           action: "basetable11",
+    //           name: "用户管理"
+    //         },
+    //         {
+    //           action: "vuetable",
+    //           name: "角色管理"
+    //         },
+    //         {
+    //           action: "power",
+    //           name: "权限管理"
+    //         },
+    //         {
+    //           action: "compony",
+    //           name: "公司管理"
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       icon: "el-icon-menu",
+    //       action: "3fwe",
+    //       name: "冰骑士",
+    //       son: [
+    //         {
+    //           action: "oldCharts",
+    //           name: "冰骑士管理"
+    //         }
+    //       ]
+    //     }
+    //   ]
     };
   },
   computed: {
